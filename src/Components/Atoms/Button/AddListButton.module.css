@@ -1,0 +1,23 @@
+.button {
+  background: none;
+  border: none;
+}
+
+.button:hover {
+  color: greenyellow;
+  border-color: white;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 3em;
+  vertical-align: middle;
+  color: #e52e71;
+  transition: all 0.2s;
+}
+
+.icon:hover {
+  color: #00ff88;
+  border-color: white;
+  cursor: pointer;
+}

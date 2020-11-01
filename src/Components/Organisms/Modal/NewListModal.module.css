@@ -1,0 +1,49 @@
+.modal {
+  background: var(--primary-dark);
+}
+
+.modalBody {
+  background: var(--secondary-dark);
+  box-shadow: -1rem 0rem 1.5rem #000;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 5em;
+}
+
+.button {
+  background: none;
+  border: none;
+}
+
+.button:hover {
+  color: var(--accent);
+  border-color: var(--white);
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 2em;
+  vertical-align: middle;
+  color: var(--white);
+  transition: all 0.2s;
+}
+
+.icon:hover {
+  color: var(--accent);
+  border-color: var(--white);
+  cursor: pointer;
+}
+
+input[type="text"] {
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  text-align: center;
+  color: var(--white);
+  width: 100%;
+  margin-bottom: 1em;
+}
