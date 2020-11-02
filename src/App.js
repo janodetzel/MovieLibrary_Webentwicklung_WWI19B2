@@ -1,10 +1,16 @@
+import React, { useState } from 'react'
+
 import './App.css';
 import Home from './Components/Pages/Home';
+import Login from './Components/Pages/Login';
 
-function App() {
+const App = () => {
+
+  const [state, setState] = useState({ name: "" })
+
   return (
     <div className="App">
-      <Home></Home>
+      {state.name ? <Home name={state.name}></Home> : <Login submit={(props) => setState({ name: props })}></Login>}
     </div>
   );
 }

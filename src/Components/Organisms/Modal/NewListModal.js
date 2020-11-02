@@ -8,7 +8,7 @@ import style from "./NewListModal.module.css";
 
 const NewListModal = (props) => {
 
-  const defaultInput = "What's my name?";
+  const defaultInput = "Name the list";
   const [input, setInput] = useState("")
 
 

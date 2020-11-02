@@ -19,6 +19,9 @@
   --white: #ffffff;
   --black: #000000;
 
+  --button-green: #00ff88;
+  --button-pink: #e52e71;
+
   --gradient-1: linear-gradient(90deg, #ff8a00, #e52e71);
 
   --font-size: 16px;
@@ -45,4 +48,14 @@ button:focus,
 textarea:focus,
 input:focus {
   outline: none;
+}
+
+.read-more-button {
+  transition: all 0.5s;
+  color: var(--button-green);
+}
+
+.read-more-button:hover {
+  color: var(--button-pink);
+  cursor: pointer;
 }

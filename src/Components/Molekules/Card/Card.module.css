@@ -40,12 +40,14 @@
 .poster {
   display: flex;
   justify-content: center;
-  margin: 1rem;
+  margin: 1rem auto;
+  max-width: 6rem;
 }
 
 .poster img {
   border-radius: 1rem;
-  max-width: 8rem;
+  width: 100%;
+
   box-shadow: -1rem 0rem 1.5rem #000;
 }
 
@@ -69,12 +71,14 @@
 }
 
 .title {
-  flex: 4;
+  flex: 2;
   font-size: 1.5rem;
 }
 
 .date {
+  font-size: 0.8rem;
   flex: 1;
+  text-align: end;
 }
 
 .card:hover .title {

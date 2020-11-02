@@ -6,17 +6,16 @@ import style from './Home.module.css'
 
 
 const Home = (props) => {
-
-    const [state, setstate] = useState({
-        name: props.name,
-        cardLists: ["List 1"]
-    })
-
     const [modalState, setModalState] = useState(false);
 
     const toggleModal = () => {
         setModalState(!modalState)
     }
+
+    const [state, setstate] = useState({
+        name: props.name,
+        cardLists: []
+    })
 
     const addList = (props) => {
         console.log(props)
@@ -37,12 +36,16 @@ const Home = (props) => {
 
     return (
         <div className={style.home}>
+            <div className={style.title}>
+                <h1>Hi, {props.name}!</h1>
+                <p>Create a new List</p>
+            </div>
             <div className={style.cardLists}>
                 {state.cardLists.map((cardList, key) => (
                     <CardList key={key} title={cardList} nummer={key} />
                 ))}
             </div>
-            <div className={style.addListButton}>s
+            <div className={style.addListButton}>
                 <AddListButton onClick={toggleModal}></AddListButton>
             </div>
             <NewListModal show={modalState} hide={toggleModal} submit={(props) => addList(props)}></NewListModal>

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { CircularProgressbar } from 'react-circular-progressbar';
-import { getAllDetails } from '../../Utils/theMovieDB';
 
 import AddCardButton from '../../Atoms/Button/AddCardButton'
 import 'react-circular-progressbar/dist/styles.css';
@@ -21,44 +20,41 @@ const Card = (props) => {
   const [state, setState] = useState({
     new: props.new,
     created: new Date(),
-    title: "Fight Club",
-    tagline: "Mischief. Mayhem. Soap.",
-    date: "1999-10-15",
-    adult: true,
-    popularity: 37.717,
-    voteAverage: 8.4,
-    posterSrc: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+    title: "",
+    tagline: "",
+    date: "123",
+    adult: false,
+    popularity: 0,
+    voteAverage: 0,
+    posterSrc: "",
     genres: ["Drama", "Action"]
   });
 
 
   useEffect(() => {
 
+    const key = process.env.REACT_APP_MOVIE_DB_API
+    const string = "https://api.themoviedb.org/3/movie/" + props.movieId + "?api_key=" + key
 
-    const fetchDetails = async () => {
-      const details = await getAllDetails(550)
+    fetch(string).then(
+      res => res.json()
+    ).then(
+      (details) => {
+
+        setState(prevState => ({
+          ...prevState,
+          title: details.title,
+          tagline: details.tagline,
+          date: details.release_date,
+          adult: details.adult,
+          popularity: details.popularity,
+          voteAverage: details.vote_average,
+          posterSrc: "https://image.tmdb.org/t/p/w500/" + details.poster_path,
+        }))
 
 
-      console.log(details)
-      // setState({
-      //   ...state,
-      //   title: details.title,
-      //   tagline: details.tagline,
-      //   date: details.date,
-      //   adult: details.adult,
-      //   popularity: details.popularity,
-      //   voteAverage: details.vote_average,
-      //   posterSrc: "https://image.tmdb.org/t/p/w500/" + details.poster_path,
-      //   // genres: details.genres
-      // })
-
-    }
-
-
-    fetchDetails()
-
-    // const details = async () => await getDetails(props.movieId)
-
+      }
+    )
 
   }, [])
 
@@ -73,7 +69,6 @@ const Card = (props) => {
           </header>
           <content>
             <div className={style.titleBar}>
-
               <h2 className={style.title}>{state.title}</h2>
               <p className={style.date}>{state.date}</p>
             </div>

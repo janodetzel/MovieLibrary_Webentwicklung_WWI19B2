@@ -6,3 +6,8 @@
 .addListButton {
   text-align: center;
 }
+
+.home .title {
+  text-align: center;
+  margin-bottom: 5rem;
+}

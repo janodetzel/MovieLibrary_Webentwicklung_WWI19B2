@@ -9083,6 +9083,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-loading@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
+  integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
+
 react-overlays@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-4.1.1.tgz#0060107cbe1c5171a744ccda3fbf0556d064bc5f"
@@ -9096,6 +9101,11 @@ react-overlays@^4.1.0:
     prop-types "^15.7.2"
     uncontrollable "^7.0.0"
     warning "^4.0.3"
+
+react-promise-tracker@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-promise-tracker/-/react-promise-tracker-2.1.0.tgz#a8ac2ca5322ca60f83fa7a00ad9d99bfbbdb8434"
+  integrity sha512-1LQSGAnFF4o++iPFgeBrMpS+ZHQg8ZGl9Zuf70v+OoLxuOnUeLCP7ugma+InBCUZzPnSLyWTLt/jyW+FAy5ELQ==
 
 react-refresh@^0.8.3:
   version "0.8.3"
@@ -9184,6 +9194,11 @@ react@^17.0.1:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+read-more-react@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/read-more-react/-/read-more-react-1.0.10.tgz#d384d0d1403ab5705e309b44574af71810fded6f"
+  integrity sha512-8IRDU/tJX1hLbHjPxJHeUxAhm/wC8RHPSbAA+3mS7Dk13/PJf9ra7Z18apkqqPkENIoEaQI5NqhIMQIa1vOxfw==
 
 read-pkg-up@^2.0.0:
   version "2.0.0"
