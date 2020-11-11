@@ -4,32 +4,38 @@
 }
 
 .card {
-  height: 35em;
+  min-height: 35em;
   width: 30em;
-  min-width: 20rem;
-  padding: 1.5rem;
-  padding-bottom: 0rem;
-  border-radius: 1rem;
+  min-width: 20em;
+  padding: 1.5em;
+  padding-bottom: 0em;
+  border-radius: 1em;
   background: var(--secondary-dark);
-  box-shadow: -1rem 0rem 1.5rem #000;
+  box-shadow: -1em 0em 1.5em #000;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
-  transition: 0.2s;
+  transition: all 0.2s;
   margin: 0;
   scroll-snap-align: start;
   clear: both;
   position: relative;
-  margin-top: 3rem;
+  margin-top: 3em;
 }
 
+.deleteButton {
+  position: absolute;
+
+  top: 1em;
+  left: 1em;
+}
 .card:focus-within ~ .card,
 .card:hover ~ .card {
   transform: translateX(130px);
 }
 
 .card:hover {
-  transform: translateY(-1rem);
+  transform: translateY(-1em);
   cursor: grab;
 }
 
@@ -40,20 +46,21 @@
 .poster {
   display: flex;
   justify-content: center;
-  margin: 1rem auto;
-  max-width: 6rem;
+  margin: 1em auto;
+  max-width: 6em;
+  max-height: 9em;
 }
 
 .poster img {
-  border-radius: 1rem;
+  border-radius: 1em;
   width: 100%;
-
-  box-shadow: -1rem 0rem 1.5rem #000;
+  height: auto;
+  box-shadow: -1em 0em 1.5em #000;
+  transition: all 1s;
 }
 
 .card:hover .poster img {
   transform: scale(1.1);
-  transition: all 1s;
 }
 
 .titleBar {
@@ -62,7 +69,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .titleBar * {
@@ -72,28 +79,28 @@
 
 .title {
   flex: 2;
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 
 .date {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   flex: 1;
   text-align: end;
 }
 
 .card:hover .title {
-  text-shadow: -1rem 0rem 1.5rem #000;
+  text-shadow: -1em 0em 1.5em #000;
   transition: all 0.5s;
 }
 
 .tagline {
   font-style: italic;
   color: var(--muted);
+  transition: all 0.2s;
 }
 
 .card:hover .tagline {
   color: var(--white);
-  transition: all 0.5s;
 }
 
 .vote {
@@ -103,16 +110,16 @@
 }
 
 .vote .rating {
-  max-width: 4rem;
-  margin-right: 2rem;
+  max-width: 4em;
+  margin-right: 2em;
 }
 
 .vote p {
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .genres {
-  padding: 0.5rem 0 1rem;
+  padding: 0.5em 0 1em;
   line-height: 2;
   margin-bottom: 0;
   display: flex;
@@ -124,15 +131,15 @@
 .genres a {
   font-style: normal;
   font-weight: 600;
-  font-size: 0.5rem;
+  font-size: 0.5em;
   color: #7a7a8c;
   text-transform: uppercase;
-  font-size: 0.66rem;
+  font-size: 0.66em;
   border: 3px solid #28242f;
-  border-radius: 2rem;
-  padding: 0.2rem 0.85rem 0.25rem;
+  border-radius: 2em;
+  padding: 0.2em 0.85em 0.25em;
   position: relative;
-  margin-top: 1rem;
+  margin-top: 1em;
   transition: all 0.2s;
 }
 

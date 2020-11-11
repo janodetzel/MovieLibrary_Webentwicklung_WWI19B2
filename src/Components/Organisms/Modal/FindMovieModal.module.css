@@ -8,14 +8,14 @@
 
 .modalBody {
   background: var(--secondary-dark);
-  box-shadow: -1rem 0rem 1.5rem #000;
+  box-shadow: -1em 0em 1.5em #000;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 5em 1em;
+  margin: 5em auto;
 }
 
 .button {
@@ -56,11 +56,15 @@ input[type="text"] {
 
   padding: 1em 0;
   margin: 1em 0;
-  transition: 0.2s;
+  transition: all 0.2s;
 }
 
 .result:hover {
-  transform: translateX(1rem);
+  transform: translateX(1em);
+}
+
+.poster:hover,
+.title:hover {
   cursor: pointer;
 }
 
@@ -69,10 +73,10 @@ input[type="text"] {
 }
 
 .poster img {
-  border-radius: 1rem;
+  border-radius: 1em;
   width: 100%;
 
-  box-shadow: -1rem 0rem 1.5rem #000;
+  box-shadow: -1em 0em 1.5em #000;
 }
 
 .titleBar {
@@ -93,6 +97,7 @@ input[type="text"] {
 }
 
 .title {
+  font-size: 2em;
   flex: 2;
   text-align: start;
 }

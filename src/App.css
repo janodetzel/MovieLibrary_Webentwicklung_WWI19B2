@@ -24,14 +24,33 @@
 
   --gradient-1: linear-gradient(90deg, #ff8a00, #e52e71);
 
-  --font-size: 14px;
+  --font-size: 10px;
+  --font-size-md: 14px;
   --font-size-lg: 16px;
 }
 
+.react-read-more-read-less {
+  color: var(--button-pink);
+}
+
+.react-read-more-read-less-more {
+  color: var(--button-green);
+}
+
 @media (min-width: 575.98px) {
-  body {
-    font-size: var(--font-size-lg) !important;
+  :root {
+    --font-size: 14px;
   }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-size: 16px;
+  }
+}
+
+.modal {
+  padding-right: 0px !important;
 }
 
 body {

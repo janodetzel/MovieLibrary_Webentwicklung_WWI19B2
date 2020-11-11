@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AddListButton from '../Atoms/Button/AddListButton'
 import CardList from '../Organisms/CardList/CardList'
 import NewListModal from '../Organisms/Modal/NewListModal'
@@ -12,26 +12,25 @@ const Home = (props) => {
         setModalState(!modalState)
     }
 
-    const [state, setstate] = useState({
+    const [state, setState] = useState(JSON.parse(localStorage.getItem(props.name)) || {
         name: props.name,
-        cardLists: []
+        cardLists: [],
     })
 
+    useEffect(() => {
+        localStorage.setItem(props.name, JSON.stringify(state));
+    }, [state])
+
+
     const addList = (props) => {
-        console.log(props)
-        setstate({
-            cardLists: [...state.cardLists, props]
+        setState({
+            cardLists: [...state.cardLists, { title: props, cards: [] }]
         })
     }
 
-    const removeList = (index) => {
-        const newState = state.cardLists
-        if (index > -1) {
-            newState.splice(index, 1)
-        }
-        setstate({
-            cardLists: newState
-        })
+    const deleteList = (props) => {
+        console.log("DELETE LIST", props)
+        setState({ cardLists: state.cardLists.filter(list => list.title != props) });
     }
 
     return (
@@ -41,8 +40,9 @@ const Home = (props) => {
                 <p>Create a new List</p>
             </div>
             <div className={style.cardLists}>
+                {console.log(state.cardLists)}
                 {state.cardLists.map((cardList, key) => (
-                    <CardList key={key} title={cardList} nummer={key} />
+                    <CardList key={key} thisIndex={key} creator={state.name} title={cardList.title} deleteList={(props) => deleteList(props)} />
                 ))}
             </div>
             <div className={style.addListButton}>

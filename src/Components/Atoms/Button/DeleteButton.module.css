@@ -1,0 +1,16 @@
+.button {
+  background: none;
+  border: none;
+}
+.icon {
+  font-size: 2em;
+  vertical-align: middle;
+  color: var(--button-pink);
+  transition: all 0.2s;
+}
+
+.icon:hover {
+  color: var(--button-green);
+  border-color: white;
+  cursor: pointer;
+}

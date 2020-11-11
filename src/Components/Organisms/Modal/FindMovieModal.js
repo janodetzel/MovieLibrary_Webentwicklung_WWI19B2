@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import ReactLoading from 'react-loading';
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
-import ReadMoreReact from 'read-more-react';
+import ReactReadMoreReadLess from "react-read-more-read-less";
 
 import { FiNavigation } from "react-icons/fi";
 
@@ -34,7 +34,8 @@ const FindMovieModal = (props) => {
             var filtered = data.results.filter(res => res.poster_path != null && res.overview != "")
             console.log(filtered)
             setResults(filtered)
-          } catch {
+          } catch (error) {
+            console.log(error)
           }
         })
     }
@@ -63,20 +64,22 @@ const FindMovieModal = (props) => {
 
   const Result = (props) => {
     return (
-      <div className={style.result} onClick={props.onClick}>
-        <div className={style.poster}>
+      <div className={style.result}>
+        <div className={style.poster} onClick={props.onClick}>
           <img src={posterSrcDefault + props.poster_path} alt="Poster" ></img>
         </div>
-        <div className={style.titleBar}>
-          <h2 className={style.title}>{props.title}</h2>
+        <div className={style.titleBar} onClick={props.onClick}>
+          <p className={style.title}>{props.title}</p>
           <p className={style.date}>{props.release_date}</p>
         </div>
-        <div className={style.overview}>
-          <ReadMoreReact text={props.overview}
-            min={80}
-            ideal={100}
-            max={130}
-            readMoreText="Read More" />
+        <div className={style.overview} >
+          <ReactReadMoreReadLess
+            charLimit={80}
+            readMoreText={"Read more ▼"}
+            readLessText={"Read less ▲"}
+          >
+            {props.overview}
+          </ReactReadMoreReadLess>
         </div>
       </div>
     )
@@ -91,8 +94,6 @@ const FindMovieModal = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered>
         <Modal.Body className={style.modalBody}>
-
-
           <div className={style.wrapper}>
             <form onSubmit={e => handleSubmit(e)}>
               <input type="text" placeholder={defaultInput} value={input} onChange={(e) => setInput(e.target.value)} />
@@ -103,8 +104,6 @@ const FindMovieModal = (props) => {
               })
             }
           </div>
-
-
         </Modal.Body>
       </Modal >
     </>
