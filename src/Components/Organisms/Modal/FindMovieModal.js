@@ -25,18 +25,19 @@ const FindMovieModal = (props) => {
 
 
     console.log(string)
-    fetch(string)
-      .then(res => res.json())
-      .then(data => {
-        try {
-          var filtered = data.results.filter(res => res.poster_path != null && res.overview != "")
-          console.log(filtered)
-          setResults(filtered)
-        } catch {
-        }
 
-      })
-
+    if (input) {
+      fetch(string)
+        .then(res => res.json())
+        .then(data => {
+          try {
+            var filtered = data.results.filter(res => res.poster_path != null && res.overview != "")
+            console.log(filtered)
+            setResults(filtered)
+          } catch {
+          }
+        })
+    }
   }, [input])
 
   const handleSubmit = (id) => {

@@ -24,7 +24,14 @@
 
   --gradient-1: linear-gradient(90deg, #ff8a00, #e52e71);
 
-  --font-size: 16px;
+  --font-size: 14px;
+  --font-size-lg: 16px;
+}
+
+@media (min-width: 575.98px) {
+  body {
+    font-size: var(--font-size-lg) !important;
+  }
 }
 
 body {

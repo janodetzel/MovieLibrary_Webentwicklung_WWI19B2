@@ -20,14 +20,17 @@ const Card = (props) => {
   const [state, setState] = useState({
     new: props.new,
     created: new Date(),
-    title: "",
-    tagline: "",
-    date: "123",
-    adult: false,
-    popularity: 0,
-    voteAverage: 0,
-    posterSrc: "",
-    genres: ["Drama", "Action"]
+    genres: ["Drama", "Action"],
+    details: {
+      title: "",
+      tagline: "",
+      release_date: "123",
+      adult: false,
+      popularity: 0,
+      vote_average: 0,
+      poster_path: "",
+      genres: []
+    }
   });
 
 
@@ -36,25 +39,29 @@ const Card = (props) => {
     const key = process.env.REACT_APP_MOVIE_DB_API
     const string = "https://api.themoviedb.org/3/movie/" + props.movieId + "?api_key=" + key
 
-    fetch(string).then(
-      res => res.json()
-    ).then(
-      (details) => {
+    if (!state.new) {
 
-        setState(prevState => ({
-          ...prevState,
-          title: details.title,
-          tagline: details.tagline,
-          date: details.release_date,
-          adult: details.adult,
-          popularity: details.popularity,
-          voteAverage: details.vote_average,
-          posterSrc: "https://image.tmdb.org/t/p/w500/" + details.poster_path,
-        }))
+      fetch(string).then(
+        res => res.json()
+      ).then(
+        (details) => {
+
+          setState(prevState => ({
+            ...prevState,
+            title: details.title,
+            tagline: details.tagline,
+            date: details.release_date,
+            adult: details.adult,
+            popularity: details.popularity,
+            voteAverage: details.vote_average,
+            posterSrc: "https://image.tmdb.org/t/p/w500/" + details.poster_path,
+          }))
 
 
-      }
-    )
+        }
+      )
+    }
+
 
   }, [])
 
@@ -74,7 +81,7 @@ const Card = (props) => {
             </div>
             <p className={style.tagline}>{state.tagline}</p>
             <div className={style.vote}>
-              <CircularProgressbar className={style.rating} value={state.voteAverage} text={`${state.voteAverage}%`} />
+              <CircularProgressbar className={style.rating} value={state.voteAverage} maxValue={10} text={`${state.voteAverage}`} />
               <p>User Rating</p>
             </div>
           </content>
