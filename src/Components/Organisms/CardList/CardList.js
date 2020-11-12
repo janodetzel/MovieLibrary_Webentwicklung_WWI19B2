@@ -5,6 +5,10 @@ import Card from '../../Molekules/Card/Card';
 import FindMovieModal from '../Modal/FindMovieModal';
 import DeleteButton from '../../Atoms/Button/DeleteButton';
 
+import { useStore } from '../../Utils/zustand'
+import shallow from 'zustand/shallow'
+
+
 const CardList = (props) => {
 
     const [modalState, setModalState] = useState(false);
@@ -13,14 +17,23 @@ const CardList = (props) => {
         setModalState(!modalState)
     }
 
-    const [cards, setCards] = useState([]);
+    // const [cards, setCards] = useState([]);
+
+
+    const { cardLists, addCardList, deleteCardList } = useStore(state => ({ cardLists: state.cardLists, addCardList: state.addCardList, deleteCardList: state.deleteCardList }), shallow)
+
+    const currentCard = useStore(state => state.cardLists[props.index])
+    const { cards, addCard2, deleteCard2 } = useStore(state => ({ cards: currentCard.cards, addCard2: state.cardLists[props.index].addCard, deleteCard2: state.cardLists[props.index] }))
+
+    console.log("CURRENTCARD", currentCard)
 
     const addCard = (movieId) => {
-        setCards([...cards, movieId])
+        addCard2(movieId, currentCard)
+        // setCards([...cards, movieId])
     }
 
     const deleteCard = (props) => {
-        setCards(cards.filter(id => id != props));
+        // setCards(cards.filter(id => id != props));
     }
 
     return (

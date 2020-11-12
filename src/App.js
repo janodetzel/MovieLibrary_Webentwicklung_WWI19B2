@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useStore } from './Components/Utils/zustand'
 
 import './App.css';
 import Home from './Components/Pages/Home';
@@ -6,11 +7,13 @@ import Login from './Components/Pages/Login';
 
 const App = () => {
 
-  const [state, setState] = useState({ name: "" })
+
+  const { name, setName } = useStore()
+
 
   return (
     <div className="App">
-      {state.name ? <Home name={state.name}></Home> : <Login submit={(props) => setState({ name: props })}></Login>}
+      {name ? <Home name={name}></Home> : <Login submit={(props) => setName(props)}></Login>}
     </div>
   );
 }
