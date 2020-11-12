@@ -28,11 +28,7 @@ const CardList = (props) => {
     }
 
     const deleteCard = (props) => {
-        console.log("DELETE THIS", props)
-        console.log("FROM THIS", cards)
-        let filtered = cards.filter(id => id != props)
-        console.log("TO THIS", filtered)
-        setCards(filtered);
+        setCards(cards.filter(id => id != props));
     }
 
     return (

@@ -25,13 +25,13 @@ const Home = (props) => {
     const addList = (props) => {
         setState({
             ...state,
-            cardLists: [...state.cardLists, { title: props, cards: [] }]
+            cardLists: [...state.cardLists, { title: props }]
         })
     }
 
     const deleteList = (props) => {
         console.log("DELETE LIST", props)
-        setState({ ...state, cardLists: state.cardLists.filter(list => list.title != props) });
+        setState({ cardLists: state.cardLists.filter(list => list.title != props) });
     }
 
     return (
@@ -43,7 +43,7 @@ const Home = (props) => {
             <div className={style.cardLists}>
                 {console.log(state.cardLists)}
                 {state.cardLists.map((cardList, key) => (
-                    <CardList key={key} thisIndex={key} creator={state.name} title={cardList.title} deleteList={(props) => deleteList(props)} />
+                    <CardList key={key} index={key} creator={state.name} title={cardList.title} deleteList={(props) => deleteList(props)} />
                 ))}
             </div>
             <div className={style.addListButton}>
