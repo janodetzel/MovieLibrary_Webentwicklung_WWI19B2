@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import ReactReadMoreReadLess from "react-read-more-read-less";
-
+import { usePromiseTracker, trackPromise } from "react-promise-tracker";
 
 import AddCardButton from '../../Atoms/Button/AddCardButton'
-
-import 'react-circular-progressbar/dist/styles.css';
+import DeleteButton from "../../Atoms/Button/DeleteButton";
+import LoadingIndicator from '../../Atoms/Indicator/LoadingIndicator'
 
 import style from "./Card.module.css";
-import DeleteButton from "../../Atoms/Button/DeleteButton";
+import 'react-circular-progressbar/dist/styles.css';
 
 const EmptyCard = (props) => {
   return (
@@ -19,8 +19,8 @@ const EmptyCard = (props) => {
   );
 };
 
-
 const Card = (props) => {
+
   const [state, setState] = useState({
     new: props.new,
     created: new Date(),
@@ -38,22 +38,25 @@ const Card = (props) => {
     }
   });
 
-
-
-
   useEffect(() => {
     const key = process.env.REACT_APP_MOVIE_DB_API
     const string = "https://api.themoviedb.org/3/movie/" + props.movieId + "?api_key=" + key
+
+
     if (!state.new) {
-      fetch(string).then(
-        res => res.json()
-      ).then(
-        (details) => {
-          onSetResult(details)
-        }
+      trackPromise(
+        fetch(string).then(
+          res => res.json()
+        ).then(
+          (details) => {
+            onSetResult(details)
+          }
+        )
       )
     }
   }, [])
+
+
 
   const onSetResult = (details, key) => {
     setState(prevState => ({
@@ -70,51 +73,69 @@ const Card = (props) => {
     }))
   }
 
+  const { promiseInProgress } = usePromiseTracker();
+
 
   return (
     <>
       { state.new ?
-        <EmptyCard onClick={props.onClick}></EmptyCard> : <article className={style.card}>
+        <EmptyCard onClick={props.onClick}></EmptyCard>
+        :
+
+        <article className={style.card}>
           <div className={style.deleteButton} onClick={() => props.deleteCard(props.movieId)}>
             <DeleteButton></DeleteButton>
           </div>
-          <header className={style.cardHeader}>
-            <div className={style.poster}>
-              <img src={state.posterSrc} alt="Poster" ></img>
-            </div>
-          </header>
-          <content>
-            <div className={style.titleBar}>
-              <h2 className={style.title}>{state.title}</h2>
-              <p className={style.date}>{state.date}</p>
-            </div>
-            <p className={style.tagline}>{state.tagline}</p>
-            <div className={style.overview}>
-              {
-                state.overview &&
-                <ReactReadMoreReadLess
-                  charLimit={80}
-                  readMoreText={"Read more ▼"}
-                  readLessText={"Read less ▲"}
-                >
-                  {state.overview}
-                </ReactReadMoreReadLess>
-              }
-            </div>
-            <div className={style.vote}>
-              <CircularProgressbar className={style.rating} value={state.voteAverage} maxValue={10} text={`${state.voteAverage}`} />
-              <p>User Rating</p>
-            </div>
-          </content>
-          <footer>
-            <div className={style.genres}> {state.genres &&
-              state.genres.slice(0, 3).map((item, key) => {
-                return (<a key={key}>{item.name}</a>)
-              })
-            }</div>
-            <p>{state.created.toDateString()}</p>
-          </footer>
-        </article>}
+          {
+            promiseInProgress ? <LoadingIndicator />
+              :
+              <div className={style.cardWrapper}>
+                <header className={style.cardHeader}>
+                  <div className={style.poster}>
+                    <img src={state.posterSrc} alt="Poster" ></img>
+                  </div>
+                </header>
+                <content>
+                  <div className={style.titleBar}>
+                    <h2 className={style.title}>{state.title}</h2>
+                    <p className={style.date}>{state.date}</p>
+                  </div>
+                  <p className={style.tagline}>{state.tagline}</p>
+                  <div className={style.overview}>
+                    {
+                      state.overview &&
+                      <ReactReadMoreReadLess
+                        charLimit={80}
+                        readMoreText={"Read more ▼"}
+                        readLessText={"Read less ▲"}
+                      >
+                        {state.overview}
+                      </ReactReadMoreReadLess>
+                    }
+                  </div>
+                  <div className={style.vote}>
+                    {state.voteAverage > 5 ?
+                      <CircularProgressbar className={`${style.rating}`} value={state.voteAverage} maxValue={10} text={`${state.voteAverage}`} />
+                      :
+                      <CircularProgressbar className={`BadRating ${style.rating}`} value={state.voteAverage} maxValue={10} text={`${state.voteAverage}`} />
+                    }
+                    <p>User Rating</p>
+                  </div>
+                </content>
+                <footer>
+                  <div className={style.genres}> {state.genres &&
+                    state.genres.slice(0, 3).map((item, key) => {
+                      return (<a key={key}>{item.name}</a>)
+                    })
+                  }</div>
+                  <p>{state.created.toDateString()}</p>
+                </footer>
+              </div>
+
+          }
+        </article>
+
+      }
 
     </>
 

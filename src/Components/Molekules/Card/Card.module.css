@@ -111,11 +111,21 @@
 
 .vote .rating {
   max-width: 4em;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 
 .vote p {
-  font-size: 1.2em;
+  font-size: 1.5em;
+}
+
+.rating text {
+  font-size: 1.5em !important;
+  font-weight: normal;
+  fill: none !important;
+}
+
+.pink {
+  stroke: var(--button-pink) !important;
 }
 
 .genres {

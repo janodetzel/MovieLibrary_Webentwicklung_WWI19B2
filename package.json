@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.5.3",
+    "netlify-cli": "^2.68.4",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-circular-progressbar": "^2.0.3",
@@ -18,7 +19,8 @@
     "react-read-more-read-less": "^1.0.7",
     "react-scripts": "4.0.0",
     "read-more-react": "^1.0.10",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "zustand": "^3.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
