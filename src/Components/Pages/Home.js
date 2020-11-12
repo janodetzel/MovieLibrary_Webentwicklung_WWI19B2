@@ -12,25 +12,26 @@ const Home = (props) => {
         setModalState(!modalState)
     }
 
-    const [state, setState] = useState(JSON.parse(localStorage.getItem(props.name)) || {
+    const [state, setState] = useState(JSON.parse(sessionStorage.getItem(props.name)) || {
         name: props.name,
         cardLists: [],
     })
 
     useEffect(() => {
-        localStorage.setItem(props.name, JSON.stringify(state));
+        sessionStorage.setItem(props.name, JSON.stringify(state));
     }, [state])
 
 
     const addList = (props) => {
         setState({
+            ...state,
             cardLists: [...state.cardLists, { title: props, cards: [] }]
         })
     }
 
     const deleteList = (props) => {
         console.log("DELETE LIST", props)
-        setState({ cardLists: state.cardLists.filter(list => list.title != props) });
+        setState({ ...state, cardLists: state.cardLists.filter(list => list.title != props) });
     }
 
     return (

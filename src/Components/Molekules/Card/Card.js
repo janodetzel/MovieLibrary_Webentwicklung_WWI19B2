@@ -107,7 +107,7 @@ const Card = (props) => {
             </div>
           </content>
           <footer>
-            <div className={style.genres}>{
+            <div className={style.genres}> {state.genres &&
               state.genres.slice(0, 3).map((item, key) => {
                 return (<a key={key}>{item.name}</a>)
               })

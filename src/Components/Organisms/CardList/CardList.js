@@ -7,35 +7,20 @@ import DeleteButton from '../../Atoms/Button/DeleteButton';
 
 const CardList = (props) => {
 
+    const listIdentifyer = props.creator + props.title
+
     const [modalState, setModalState] = useState(false);
 
     const toggleModal = () => {
         setModalState(!modalState)
     }
 
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState(JSON.parse(sessionStorage.getItem(listIdentifyer)) || []);
 
 
-    // useEffect(() => {
-    //     let storage = JSON.parse(localStorage.getItem(props.creator)).cardList
-
-    //     if (storage) {
-    //         let storedCards = storage[props.thisIndex].cards
-    //         setCards(storedCards)
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     let storage = JSON.parse(localStorage.getItem(props.creator))
-
-
-    //     storage.cardLists[props.thisIndex].cards = cards
-
-    //     // localStorage.setItem(props.creator, JSON.stringify(storage))
-
-    //     console.log("STORAGE", storage.cardLists[props.thisIndex].cards)
-    //     // localStorage.setItem(props.title, JSON.stringify(cards));
-    // }, [cards])
+    useEffect(() => {
+        sessionStorage.setItem(listIdentifyer, JSON.stringify(cards));
+    }, [cards])
 
 
     const addCard = (movieId) => {
@@ -43,7 +28,11 @@ const CardList = (props) => {
     }
 
     const deleteCard = (props) => {
-        setCards(cards.filter(id => id != props));
+        console.log("DELETE THIS", props)
+        console.log("FROM THIS", cards)
+        let filtered = cards.filter(id => id != props)
+        console.log("TO THIS", filtered)
+        setCards(filtered);
     }
 
     return (
