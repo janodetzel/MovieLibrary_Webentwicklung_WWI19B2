@@ -16,32 +16,10 @@ const Home = (props) => {
         setModalState(!modalState)
     }
 
-
     const name = useStore(state => state.name)
     const { cardLists, addCardList, deleteCardList } = useStore(state => ({ cardLists: state.cardLists, addCardList: state.addCardList, deleteCardList: state.deleteCardList }), shallow)
 
-
     console.log("ZUSTAND CARDLISTS", cardLists)
-
-    const [state, setState] = useState({
-        name: props.name,
-        cardLists: [],
-    })
-
-
-
-    const addList = (props) => {
-        addCardList(props)
-        // setState({
-        //     ...state,
-        //     cardLists: [...state.cardLists, { title: props }]
-        // })
-    }
-
-    const deleteList = (props) => {
-        deleteCardList(props)
-        // setState({ cardLists: state.cardLists.filter(list => list.title != props) });
-    }
 
     return (
         <div className={style.home}>
@@ -51,13 +29,13 @@ const Home = (props) => {
             </div>
             <div className={style.cardLists}>
                 {cardLists.map((cardList, key) => (
-                    <CardList key={key} index={key} creator={name} title={cardList.title} deleteList={(props) => deleteList(props)} />
+                    <CardList key={key} index={key} creator={name} title={cardList.title} deleteList={(props) => deleteCardList(props)} />
                 ))}
             </div>
             <div className={style.addListButton}>
                 <AddListButton onClick={toggleModal}></AddListButton>
             </div>
-            <NewListModal show={modalState} hide={toggleModal} submit={(props) => addList(props)}></NewListModal>
+            <NewListModal show={modalState} hide={toggleModal} submit={(props) => addCardList(props)}></NewListModal>
         </div>
     )
 }

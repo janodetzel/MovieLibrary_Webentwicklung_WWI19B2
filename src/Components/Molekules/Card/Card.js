@@ -83,7 +83,7 @@ const Card = (props) => {
         :
 
         <article className={style.card}>
-          <div className={style.deleteButton} onClick={() => props.deleteCard(props.movieId)}>
+          <div className={style.deleteButton} onClick={() => props.deleteCard()}>
             <DeleteButton></DeleteButton>
           </div>
           {

@@ -25,17 +25,6 @@ const CardList = (props) => {
     console.log("CURRENTLIST", currentList)
     console.log("CURRENTSTORE", currentStore)
 
-    // const addCard = (movieId) => {
-    //     addCard2(movieId, currentList)
-    //     // setCards([...cards, movieId])
-    // }
-
-    // const deleteCard = (movieId) => {
-    //     deleteCard2(movieId, currentList)
-
-    //     // setCards(cards.filter(id => id != props));
-    // }
-
     return (
         <div className={style.cardList}>
             <div className={style.header}>
@@ -45,7 +34,7 @@ const CardList = (props) => {
                 </div>
             </div>
             <ScrollContainer className={style.cardListcontainer}>
-                {currentList.cards.map((card, key) => { return <Card key={key} new={false} movieId={card} deleteCard={(props) => deleteCard(props, currentList)} ></Card> })}
+                {currentList.cards.map((card, key) => { return <Card key={key} new={false} movieId={card} deleteCard={() => deleteCard(card, currentList)} ></Card> })}
                 <Card new={true} onClick={toggleModal}></Card>
             </ScrollContainer>
             <FindMovieModal show={modalState} hide={toggleModal} submit={(props) => addCard(props, currentList)}></FindMovieModal>

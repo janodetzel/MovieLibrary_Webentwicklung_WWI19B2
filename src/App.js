@@ -10,7 +10,6 @@ const App = () => {
 
   const { name, setName } = useStore()
 
-
   return (
     <div className="App">
       {name ? <Home name={name}></Home> : <Login submit={(props) => setName(props)}></Login>}
