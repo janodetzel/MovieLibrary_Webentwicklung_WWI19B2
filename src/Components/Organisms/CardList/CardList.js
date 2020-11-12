@@ -7,21 +7,13 @@ import DeleteButton from '../../Atoms/Button/DeleteButton';
 
 const CardList = (props) => {
 
-    const listIdentifyer = props.creator + props.title
-
     const [modalState, setModalState] = useState(false);
 
     const toggleModal = () => {
         setModalState(!modalState)
     }
 
-    const [cards, setCards] = useState(JSON.parse(sessionStorage.getItem(listIdentifyer)) || []);
-
-
-    useEffect(() => {
-        sessionStorage.setItem(listIdentifyer, JSON.stringify(cards));
-    }, [cards])
-
+    const [cards, setCards] = useState([]);
 
     const addCard = (movieId) => {
         setCards([...cards, movieId])

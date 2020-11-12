@@ -12,14 +12,11 @@ const Home = (props) => {
         setModalState(!modalState)
     }
 
-    const [state, setState] = useState(JSON.parse(sessionStorage.getItem(props.name)) || {
+    const [state, setState] = useState({
         name: props.name,
         cardLists: [],
     })
 
-    useEffect(() => {
-        sessionStorage.setItem(props.name, JSON.stringify(state));
-    }, [state])
 
 
     const addList = (props) => {
