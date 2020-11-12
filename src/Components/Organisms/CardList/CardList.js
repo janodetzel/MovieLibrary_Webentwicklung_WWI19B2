@@ -19,22 +19,22 @@ const CardList = (props) => {
 
     // const [cards, setCards] = useState([]);
 
+    const currentStore = useStore(state => state)
+    const { currentList, addCard, deleteCard } = useStore(state => ({ currentList: state.cardLists[props.index], addCard: state.addCard, deleteCard: state.deleteCard }))
 
-    const { cardLists, addCardList, deleteCardList } = useStore(state => ({ cardLists: state.cardLists, addCardList: state.addCardList, deleteCardList: state.deleteCardList }), shallow)
+    console.log("CURRENTLIST", currentList)
+    console.log("CURRENTSTORE", currentStore)
 
-    const currentCard = useStore(state => state.cardLists[props.index])
-    const { cards, addCard2, deleteCard2 } = useStore(state => ({ cards: currentCard.cards, addCard2: state.cardLists[props.index].addCard, deleteCard2: state.cardLists[props.index] }))
+    // const addCard = (movieId) => {
+    //     addCard2(movieId, currentList)
+    //     // setCards([...cards, movieId])
+    // }
 
-    console.log("CURRENTCARD", currentCard)
+    // const deleteCard = (movieId) => {
+    //     deleteCard2(movieId, currentList)
 
-    const addCard = (movieId) => {
-        addCard2(movieId, currentCard)
-        // setCards([...cards, movieId])
-    }
-
-    const deleteCard = (props) => {
-        // setCards(cards.filter(id => id != props));
-    }
+    //     // setCards(cards.filter(id => id != props));
+    // }
 
     return (
         <div className={style.cardList}>
@@ -45,10 +45,10 @@ const CardList = (props) => {
                 </div>
             </div>
             <ScrollContainer className={style.cardListcontainer}>
-                {cards.map((card, key) => { return <Card key={key} new={false} movieId={card} deleteCard={(props) => deleteCard(props)} ></Card> })}
+                {currentList.cards.map((card, key) => { return <Card key={key} new={false} movieId={card} deleteCard={(props) => deleteCard(props, currentList)} ></Card> })}
                 <Card new={true} onClick={toggleModal}></Card>
             </ScrollContainer>
-            <FindMovieModal show={modalState} hide={toggleModal} submit={(props) => addCard(props)}></FindMovieModal>
+            <FindMovieModal show={modalState} hide={toggleModal} submit={(props) => addCard(props, currentList)}></FindMovieModal>
         </div>
     )
 }
