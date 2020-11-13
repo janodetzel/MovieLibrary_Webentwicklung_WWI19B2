@@ -4,6 +4,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Card from '../../Molekules/Card/Card';
 import FindMovieModal from '../Modal/FindMovieModal';
 import DeleteButton from '../../Atoms/Button/DeleteButton';
+import uuid from 'react-uuid'
 
 import { useStore } from '../../Utils/zustand'
 import shallow from 'zustand/shallow'
@@ -20,7 +21,7 @@ const CardList = (props) => {
     // const [cards, setCards] = useState([]);
 
     const currentStore = useStore(state => state)
-    const { currentList, addCard, deleteCard } = useStore(state => ({ currentList: state.cardLists[props.index], addCard: state.addCard, deleteCard: state.deleteCard }))
+    const { currentList, addCard, deleteCard } = useStore(state => ({ currentList: state.cardLists[props.index], addCard: state.addCard, deleteCard: state.deleteCard }), shallow)
 
     console.log("CURRENTLIST", currentList)
     console.log("CURRENTSTORE", currentStore)
@@ -34,7 +35,7 @@ const CardList = (props) => {
                 </div>
             </div>
             <ScrollContainer className={style.cardListcontainer}>
-                {currentList.cards.map((card, key) => { return <Card key={key} new={false} movieId={card} deleteCard={() => deleteCard(card, currentList)} ></Card> })}
+                {currentList.cards.map(card => { return <Card key={uuid()} new={false} movieId={card} deleteCard={() => deleteCard(card, currentList)} ></Card> })}
                 <Card new={true} onClick={toggleModal}></Card>
             </ScrollContainer>
             <FindMovieModal show={modalState} hide={toggleModal} submit={(props) => addCard(props, currentList)}></FindMovieModal>

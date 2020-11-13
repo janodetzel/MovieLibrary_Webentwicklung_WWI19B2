@@ -7,6 +7,7 @@ import { usePromiseTracker, trackPromise } from "react-promise-tracker";
 import AddCardButton from '../../Atoms/Button/AddCardButton'
 import DeleteButton from "../../Atoms/Button/DeleteButton";
 import LoadingIndicator from '../../Atoms/Indicator/LoadingIndicator'
+import uuid from 'react-uuid'
 
 import style from "./Card.module.css";
 import 'react-circular-progressbar/dist/styles.css';
@@ -124,8 +125,8 @@ const Card = (props) => {
                 </content>
                 <footer>
                   <div className={style.genres}> {state.genres &&
-                    state.genres.slice(0, 3).map((item, key) => {
-                      return (<a key={key}>{item.name}</a>)
+                    state.genres.slice(0, 3).map(item => {
+                      return (<a key={uuid()}>{item.name}</a>)
                     })
                   }</div>
                   <p>{state.created.toDateString()}</p>

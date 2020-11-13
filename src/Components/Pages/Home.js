@@ -3,6 +3,7 @@ import AddListButton from '../Atoms/Button/AddListButton'
 import CardList from '../Organisms/CardList/CardList'
 import NewListModal from '../Organisms/Modal/NewListModal'
 import style from './Home.module.css'
+import uuid from 'react-uuid'
 
 import { useStore } from '../Utils/zustand'
 import shallow from 'zustand/shallow'
@@ -29,7 +30,7 @@ const Home = (props) => {
             </div>
             <div className={style.cardLists}>
                 {cardLists.map((cardList, key) => (
-                    <CardList key={key} index={key} creator={name} title={cardList.title} deleteList={(props) => deleteCardList(props)} />
+                    <CardList key={uuid()} index={key} creator={name} title={cardList.title} deleteList={(props) => deleteCardList(props)} />
                 ))}
             </div>
             <div className={style.addListButton}>

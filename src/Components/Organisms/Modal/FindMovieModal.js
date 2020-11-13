@@ -4,6 +4,7 @@ import ReactLoading from 'react-loading';
 import { trackPromise, usePromiseTracker } from 'react-promise-tracker';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import LoadingIndicator from '../../Atoms/Indicator/LoadingIndicator'
+import uuid from 'react-uuid'
 
 
 
@@ -29,6 +30,8 @@ const FindMovieModal = (props) => {
           .then(res => res.json())
           .then(data => {
             try {
+              console.log("DATA FROM FETCH", data)
+
               var filtered = data.results.filter(res => res.poster_path != null && res.overview != "")
               console.log(filtered)
               setResults(filtered)
@@ -97,8 +100,8 @@ const FindMovieModal = (props) => {
               <input type="text" placeholder={defaultInput} value={input} onChange={(e) => setInput(e.target.value)} />
             </form>
             {promiseInProgress ? <LoadingIndicator /> :
-              results.map((result, key) => {
-                return <Result key={key} onClick={() => handleSubmit(result.id)} title={result.title} release_date={result.release_date} overview={result.overview} poster_path={result.poster_path} > </Result>
+              results.map(result => {
+                return <Result key={uuid()} onClick={() => handleSubmit(result.id)} title={result.title} release_date={result.release_date} overview={result.overview} poster_path={result.poster_path} > </Result>
               })
             }
           </div>
