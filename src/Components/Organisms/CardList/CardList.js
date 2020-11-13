@@ -18,13 +18,25 @@ const CardList = (props) => {
         setModalState(!modalState)
     }
 
+    const name = useStore(state => state.name)
+
     // const [cards, setCards] = useState([]);
 
     const currentStore = useStore(state => state)
-    const { currentList, addCard, deleteCard } = useStore(state => ({ currentList: state.cardLists[props.index], addCard: state.addCard, deleteCard: state.deleteCard }), shallow)
 
-    console.log("CURRENTLIST", currentList)
-    console.log("CURRENTSTORE", currentStore)
+    // const { currentList, addCard, deleteCard } = useStore(state => ({ currentList: state.cardLists[props.index], addCard: state.addCard, deleteCard: state.deleteCard }), shallow)
+    const { cards, addCard_v2, deleteCard_v2 } = useStore(state => ({ cards: state.getCards_v2(props.title, name), addCard_v2: state.addCard_v2, deleteCard_v2: state.deleteCard_v2 }))
+
+    const handleAddCard = movieId => {
+        addCard_v2(movieId, props.title, props.user)
+        // addCard(movieId, currentList)
+    }
+
+    const handleDeleteCard = movieId => {
+        deleteCard_v2(movieId, props.title, props.user)
+        // deleteCard(movieId, currentList)
+    }
+
 
     return (
         <div className={style.cardList}>
@@ -35,10 +47,10 @@ const CardList = (props) => {
                 </div>
             </div>
             <ScrollContainer className={style.cardListcontainer}>
-                {currentList.cards.map(card => { return <Card key={uuid()} new={false} movieId={card} deleteCard={() => deleteCard(card, currentList)} ></Card> })}
+                {cards.map(card => { return <Card key={uuid()} new={false} movieId={card} deleteCard={() => handleDeleteCard(card)} ></Card> })}
                 <Card new={true} onClick={toggleModal}></Card>
             </ScrollContainer>
-            <FindMovieModal show={modalState} hide={toggleModal} submit={(props) => addCard(props, currentList)}></FindMovieModal>
+            <FindMovieModal show={modalState} hide={toggleModal} submit={(props) => handleAddCard(props)}></FindMovieModal>
         </div>
     )
 }

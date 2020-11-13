@@ -30,10 +30,8 @@ const FindMovieModal = (props) => {
           .then(res => res.json())
           .then(data => {
             try {
-              console.log("DATA FROM FETCH", data)
 
               var filtered = data.results.filter(res => res.poster_path != null && res.overview != "")
-              console.log(filtered)
               setResults(filtered)
             } catch (error) {
               console.log(error)
