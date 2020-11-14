@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { FiNavigation } from "react-icons/fi";
 
-
 import { Modal, InputGroup, FormControl, Button } from "react-bootstrap"
 import style from "./NewListModal.module.css";
 
@@ -22,7 +21,6 @@ const NewListModal = (props) => {
     }
     event.preventDefault();
   }
-
 
   const reset = () => {
     setInput("")

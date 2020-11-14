@@ -22,6 +22,8 @@ const EmptyCard = (props) => {
 
 const Card = (props) => {
 
+  const { promiseInProgress } = usePromiseTracker();
+
   const [state, setState] = useState({
     new: props.new,
     created: new Date(),
@@ -57,8 +59,6 @@ const Card = (props) => {
     }
   }, [])
 
-
-
   const onSetResult = (details, key) => {
     setState(prevState => ({
       ...prevState,
@@ -73,8 +73,6 @@ const Card = (props) => {
       posterSrc: "https://image.tmdb.org/t/p/w500/" + details.poster_path,
     }))
   }
-
-  const { promiseInProgress } = usePromiseTracker();
 
 
   return (

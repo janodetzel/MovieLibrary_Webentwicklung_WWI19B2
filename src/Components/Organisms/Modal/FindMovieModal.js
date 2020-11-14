@@ -6,8 +6,6 @@ import ReactReadMoreReadLess from "react-read-more-read-less";
 import LoadingIndicator from '../../Atoms/Indicator/LoadingIndicator'
 import uuid from 'react-uuid'
 
-
-
 import { Modal } from "react-bootstrap"
 import { posterSrcSm } from "../../Utils/theMovieDB"
 
