@@ -33,7 +33,7 @@ const Home = (props) => {
     return (
         <div className={style.home}>
             <div className={style.title}>
-                <h1>Hi, {props.user}!</h1>
+                <h1>Hi, {props.user === "Preview" ? "There" : props.user}!</h1>
                 <p>Create your own MovieLibrary</p>
             </div>
             <div className={style.cardLists}>

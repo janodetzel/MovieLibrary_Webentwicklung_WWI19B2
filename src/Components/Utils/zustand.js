@@ -13,12 +13,17 @@ export const useStore = create(persist(
                 cardLists: [
                     {
                         title: "Action",
-                        cards: [550, 550,]
+                        cards: [27205, 155, 670, 64688, 339403, 59440]
                     },
                     {
                         title: "Drama",
-                        cards: [550, 550]
+                        cards: [550, 1422, 157336, 13, 641]
+                    },
+                    {
+                        title: "Comedy",
+                        cards: [207, 105, 546554, 14160, 40807, 740985]
                     }
+
                 ]
             }
         ],

@@ -16,7 +16,6 @@ const App = () => {
   }
 
   const handleLogOut = () => {
-    console.log("BYEBYE")
     logOut()
   }
 

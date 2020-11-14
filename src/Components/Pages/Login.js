@@ -39,7 +39,7 @@ const Login = (props) => {
                 <p>Recents</p>
 
                 <div className={style.wrapper}>
-                    {users.map((user, key) => (
+                    {users.slice(0, 9).map((user, key) => (
                         <a key={key} href="#" className={style.recentUser} onClick={() => props.logIn(user.name)
                         }>{user.name}</a>
                     ))}
