@@ -34,9 +34,16 @@
   transform: translateX(130px);
 }
 
-.card:hover {
-  transform: translateY(-1em);
-  cursor: grab;
+@media (hover: hover) and (pointer: fine) {
+  .card:focus-within ~ .card,
+  .card:hover ~ .card {
+    transform: translateX(130px);
+  }
+
+  .card:hover {
+    transform: translateY(-1em);
+    cursor: grab;
+  }
 }
 
 .card:not(:first-child) {
