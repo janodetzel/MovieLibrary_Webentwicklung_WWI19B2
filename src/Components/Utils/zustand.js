@@ -60,7 +60,7 @@ export const useStore = create(persist(
         getCards_v2: (cardListTitle, userName) => {
             const userIndex = get().users.findIndex(user => user.name === userName)
             const cardListIndex = get().users[userIndex].cardLists.findIndex(cardList => cardList.title === cardListTitle)
-            if (cardListIndex != -1) return get().users[userIndex].cardLists[cardListIndex].cards
+            if (cardListIndex !== -1) return get().users[userIndex].cardLists[cardListIndex].cards
         },
 
         addCard_v2: (movieId, cardListTitle, userName) => set(state => produce(state, draft => {
