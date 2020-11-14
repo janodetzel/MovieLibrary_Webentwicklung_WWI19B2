@@ -1,28 +1,28 @@
 import React from 'react'
-import { enableMapSet } from "immer"
 
-
-import { useStore } from './Components/Utils/zustand'
+import { useStore, useSession } from './Components/Utils/zustand'
 
 import './App.css';
 import Home from './Components/Pages/Home';
 import Login from './Components/Pages/Login';
 
 const App = () => {
-
-  enableMapSet()
-
-  const { name, setName } = useStore()
+  const { user, logIn, logOut } = useSession(state => ({ user: state.user, logIn: state.logIn, logOut: state.logOut }))
   const addUser = useStore(state => state.addUser)
 
-  const handleSubmit = (name) => {
+  const handleLogin = (name) => {
+    logIn(name)
     addUser(name)
-    setName(name)
+  }
+
+  const handleLogOut = () => {
+    console.log("BYEBYE")
+    logOut()
   }
 
   return (
     <div className="App">
-      {name ? <Home></Home> : <Login submit={(props) => handleSubmit(props)}></Login>}
+      {user ? <Home user={user} logOut={() => handleLogOut()}></Home> : <Login logIn={(props) => handleLogin(props)}></Login>}
     </div>
   );
 }

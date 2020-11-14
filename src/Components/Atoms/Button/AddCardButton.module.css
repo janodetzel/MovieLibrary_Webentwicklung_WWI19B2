@@ -3,12 +3,6 @@
   border: none;
 }
 
-button:hover {
-  color: greenyellow;
-  border-color: white;
-  cursor: pointer;
-}
-
 .icon {
   font-size: 3em;
   vertical-align: middle;
@@ -17,7 +11,7 @@ button:hover {
 }
 
 .icon:hover {
-  color: #00ff88;
+  color: var(--button-green);
   border-color: white;
   cursor: pointer;
 }

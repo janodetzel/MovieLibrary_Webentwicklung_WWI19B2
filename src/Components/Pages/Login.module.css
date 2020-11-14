@@ -30,3 +30,27 @@ input[type="text"] {
   color: var(--white);
   margin-bottom: 1em;
 }
+
+.recentUsers {
+  margin-top: 5em;
+  display: block;
+}
+
+.recentUsers .wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 20em;
+}
+
+.recentUsers p {
+}
+
+.recentUser {
+  margin: 0 1em;
+}
+
+.recentUser:hover {
+  text-decoration: none;
+}

@@ -46,6 +46,8 @@ body {
   margin: 0;
   font-family: "DM Mono", monospace;
   font-size: var(--font-size);
+  max-width: 75em;
+  margin: 5em auto;
 }
 
 body::-webkit-scrollbar {

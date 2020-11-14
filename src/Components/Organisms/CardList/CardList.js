@@ -18,25 +18,15 @@ const CardList = (props) => {
         setModalState(!modalState)
     }
 
-    const name = useStore(state => state.name)
-
-    // const [cards, setCards] = useState([]);
-
-    const currentStore = useStore(state => state)
-
-    // const { currentList, addCard, deleteCard } = useStore(state => ({ currentList: state.cardLists[props.index], addCard: state.addCard, deleteCard: state.deleteCard }), shallow)
-    const { cards, addCard_v2, deleteCard_v2 } = useStore(state => ({ cards: state.getCards_v2(props.title, name), addCard_v2: state.addCard_v2, deleteCard_v2: state.deleteCard_v2 }))
+    const { cards, addCard_v2, deleteCard_v2 } = useStore(state => ({ cards: state.getCards_v2(props.title, props.user), addCard_v2: state.addCard_v2, deleteCard_v2: state.deleteCard_v2 }), shallow)
 
     const handleAddCard = movieId => {
         addCard_v2(movieId, props.title, props.user)
-        // addCard(movieId, currentList)
     }
 
     const handleDeleteCard = movieId => {
         deleteCard_v2(movieId, props.title, props.user)
-        // deleteCard(movieId, currentList)
     }
-
 
     return (
         <div className={style.cardList}>

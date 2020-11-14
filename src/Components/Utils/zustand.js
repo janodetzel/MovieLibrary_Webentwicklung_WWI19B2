@@ -6,9 +6,9 @@ import uuid from "react-uuid"
 
 export const useStore = create(persist(
     (set, get) => ({
+
         users: [
             {
-                id: 123,
                 name: "Preview",
                 cardLists: [
                     {
@@ -22,9 +22,13 @@ export const useStore = create(persist(
                 ]
             }
         ],
+        setName: (props) => set(state => ({ ...state, name: props })),
 
         addUser: userName => set(state => produce(state, draft => {
-            draft.users.push({ name: userName, cardLists: [] })
+            const userExists = get().users.find(user => user.name === userName)
+            if (!userExists) {
+                draft.users.push({ name: userName, cardLists: [] })
+            }
         })),
 
         deleteUser: userName => set(state => produce(state, draft => {
@@ -68,43 +72,6 @@ export const useStore = create(persist(
         })),
 
 
-        name: "",
-        cardLists: [{
-            title: "Action",
-            cards: [550],
-        }, {
-            title: "Drama",
-            cards: [550],
-        }, {
-            title: "Comedy",
-            cards: [550],
-        }],
-
-
-
-
-
-        setName: (props) => set(state => ({ ...state, name: props })),
-        addCardList: (props) => set(state => ({ cardLists: [...state.cardLists, { title: props, cards: [] }] })),
-        deleteCardList: (props) => set(state => ({ cardLists: state.cardLists.filter(list => list.title !== props) })),
-
-        // addCard: (card, list) => set({ cardLists: [{ title: list.title, cards: [...list.cards, card] }] }),
-        addCard: (card, list) => set(state => {
-            let cardLists = [...state.cardLists]
-            let cards = cardLists.find(cardList => cardList.title === list.title).cards
-            cards = [...cards, card]
-            cardLists.find(cardList => cardList.title === list.title).cards = cards
-            return { cardLists: cardLists }
-        }),
-        // deleteCard: (card, list) => set({ cardLists: [{ title: list.title, cards: list.cards.filter(movieId => movieId !== card) }] }),
-        deleteCard: (card, list) => set(state => {
-            let cardLists = [...state.cardLists]
-            let cards = cardLists.find(cardList => cardList.title === list.title).cards
-            cards = cards.filter(movieId => movieId !== card)
-            cardLists.find(cardList => cardList.title === list.title).cards = cards
-            return { cardLists: cardLists }
-        }),
-
         deleteEverything: () => set({}, true),
     }),
     {
@@ -114,15 +81,14 @@ export const useStore = create(persist(
 ))
 
 
-// export const useLogIn = create(persist(
-//     set => ({
-//         user: "",
-//         logIn: userId => set({user: userId}),
-//         logOut: () => set(user: ""),
-//         deleteEverything: () => set({}, true),
-//     }),
-//     {
-//         name: "LogIn", // unique name
-//         storage: sessionStorage, // (optional) default is 'localStorage'
-//     }
-// ))
+export const useSession = create(persist(
+    set => ({
+        user: null,
+        logIn: userName => set({ user: userName }),
+        logOut: () => set({ user: null }, true),
+    }),
+    {
+        name: "Session", // unique name
+        storage: sessionStorage, // (optional) default is 'localStorage'
+    }
+))
