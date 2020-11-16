@@ -5,7 +5,7 @@
 
 .card {
   min-height: 35em;
-  width: 30em;
+  width: 25em;
   min-width: 20em;
   padding: 1.5em;
   padding-bottom: 0em;
@@ -13,7 +13,7 @@
   background: var(--secondary-dark);
   box-shadow: -1em 0em 1.5em #000;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: column;
   transition: all 0.2s;
   margin: 0;
@@ -34,9 +34,16 @@
   transform: translateX(130px);
 }
 
-.card:hover {
-  transform: translateY(-1em);
-  cursor: grab;
+@media (hover: hover) and (pointer: fine) {
+  .card:focus-within ~ .card,
+  .card:hover ~ .card {
+    transform: translateX(130px);
+  }
+
+  .card:hover {
+    transform: translateY(-1em);
+    cursor: grab;
+  }
 }
 
 .card:not(:first-child) {

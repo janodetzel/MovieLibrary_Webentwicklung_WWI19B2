@@ -19,14 +19,14 @@ const Home = (props) => {
 
 
 
-    const { cardLists, addCardList_v2, deleteCardList_v2 } = useStore(state => ({ cardLists: state.getCardLists_v2(props.user), addCardList_v2: state.addCardList_v2, deleteCardList_v2: state.deleteCardList_v2 }), shallow)
+    const { cardLists, addCardList, deleteCardList } = useStore(state => ({ cardLists: state.getCardLists(props.user), addCardList: state.addCardList, deleteCardList: state.deleteCardList }), shallow)
 
     const handleAddCardList = title => {
-        addCardList_v2(title, props.user)
+        addCardList(title, props.user)
     }
 
     const handleDeleteCardList = title => {
-        deleteCardList_v2(title, props.user)
+        deleteCardList(title, props.user)
     }
 
 

@@ -18,14 +18,14 @@ const CardList = (props) => {
         setModalState(!modalState)
     }
 
-    const { cards, addCard_v2, deleteCard_v2 } = useStore(state => ({ cards: state.getCards_v2(props.title, props.user), addCard_v2: state.addCard_v2, deleteCard_v2: state.deleteCard_v2 }), shallow)
+    const { cards, addCard, deleteCard } = useStore(state => ({ cards: state.getCards(props.title, props.user), addCard: state.addCard, deleteCard: state.deleteCard }), shallow)
 
     const handleAddCard = movieId => {
-        addCard_v2(movieId, props.title, props.user)
+        addCard(movieId, props.title, props.user)
     }
 
     const handleDeleteCard = movieId => {
-        deleteCard_v2(movieId, props.title, props.user)
+        deleteCard(movieId, props.title, props.user)
     }
 
     return (
