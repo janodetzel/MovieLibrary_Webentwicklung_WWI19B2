@@ -59,7 +59,7 @@ const Card = (props) => {
     }
   }, [])
 
-  const onSetResult = (details, key) => {
+  const onSetResult = (details) => {
     setState(prevState => ({
       ...prevState,
       title: details.title,

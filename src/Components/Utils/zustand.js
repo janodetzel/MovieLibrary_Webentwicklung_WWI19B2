@@ -1,7 +1,6 @@
 import create from "zustand"
 import { persist } from "zustand/middleware"
 import produce from "immer"
-import uuid from "react-uuid"
 
 
 export const useStore = create(persist(
@@ -41,43 +40,40 @@ export const useStore = create(persist(
             if (index !== -1) draft.users.splice(index, 1)
         })),
 
-        getCardLists_v2: (userName) => {
+        getCardLists: (userName) => {
             const userIndex = get().users.findIndex(user => user.name === userName)
             if (userIndex !== -1) return get().users[userIndex].cardLists
         },
 
-        addCardList_v2: (cardListTitle, userName) => set(state => produce(state, draft => {
+        addCardList: (cardListTitle, userName) => set(state => produce(state, draft => {
             const userIndex = draft.users.findIndex(user => user.name === userName)
             if (userIndex !== -1) draft.users[userIndex].cardLists.push({ title: cardListTitle, cards: [] })
         })),
 
-        deleteCardList_v2: (cardListTitle, userName) => set(state => produce(state, draft => {
+        deleteCardList: (cardListTitle, userName) => set(state => produce(state, draft => {
             const userIndex = draft.users.findIndex(user => user.name === userName)
             const cardListIndex = draft.users[userIndex].cardLists.findIndex(cardList => cardList.title === cardListTitle)
             if (cardListIndex !== -1) draft.users[userIndex].cardLists.splice(cardListIndex, 1)
         })),
 
-        getCards_v2: (cardListTitle, userName) => {
+        getCards: (cardListTitle, userName) => {
             const userIndex = get().users.findIndex(user => user.name === userName)
             const cardListIndex = get().users[userIndex].cardLists.findIndex(cardList => cardList.title === cardListTitle)
             if (cardListIndex !== -1) return get().users[userIndex].cardLists[cardListIndex].cards
         },
 
-        addCard_v2: (movieId, cardListTitle, userName) => set(state => produce(state, draft => {
+        addCard: (movieId, cardListTitle, userName) => set(state => produce(state, draft => {
             const userIndex = draft.users.findIndex(user => user.name === userName)
             const cardListIndex = draft.users[userIndex].cardLists.findIndex(cardList => cardList.title === cardListTitle)
             if (cardListIndex !== -1) draft.users[userIndex].cardLists[cardListIndex].cards.push(movieId)
         })),
 
-        deleteCard_v2: (movieId, cardListTitle, userName) => set(state => produce(state, draft => {
+        deleteCard: (movieId, cardListTitle, userName) => set(state => produce(state, draft => {
             const userIndex = draft.users.findIndex(user => user.name === userName)
             const cardListIndex = draft.users[userIndex].cardLists.findIndex(cardList => cardList.title === cardListTitle)
             const cardIndex = draft.users[userIndex].cardLists[cardListIndex].cards.findIndex(card => card === movieId)
             if (cardListIndex !== -1) draft.users[userIndex].cardLists[cardListIndex].cards.splice(cardIndex, 1)
         })),
-
-
-        deleteEverything: () => set({}, true),
     }),
     {
         name: "MovieStorage", // unique name
