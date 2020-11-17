@@ -93,3 +93,14 @@ export const useSession = create(persist(
         storage: sessionStorage, // (optional) default is 'localStorage'
     }
 ))
+
+
+export const useStorage = create(persist(
+    (set, get) => ({
+
+    }),
+    {
+        name: "MovieStorage", // unique name
+        storage: localStorage, // (optional) default is 'localStorage'
+    }
+))

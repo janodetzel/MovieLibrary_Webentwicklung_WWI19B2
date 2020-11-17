@@ -6,8 +6,9 @@ import ReactReadMoreReadLess from "react-read-more-read-less";
 import LoadingIndicator from '../../Atoms/Indicator/LoadingIndicator'
 import uuid from 'react-uuid'
 
+
+import Result from "../../Molekules/MovieResult/Result"
 import { Modal } from "react-bootstrap"
-import { posterSrcSm } from "../../Utils/theMovieDB"
 
 import style from "./FindMovieModal.module.css";
 
@@ -28,7 +29,6 @@ const FindMovieModal = (props) => {
           .then(res => res.json())
           .then(data => {
             try {
-
               var filtered = data.results.filter(res => res.poster_path != null && res.overview != "")
               setResults(filtered)
             } catch (error) {
@@ -39,8 +39,8 @@ const FindMovieModal = (props) => {
     }
   }, [input])
 
-  const handleSubmit = (id) => {
 
+  const handleSubmit = (id) => {
     if (id) {
       props.submit(id)
       props.hide()
@@ -52,34 +52,25 @@ const FindMovieModal = (props) => {
 
   const reset = () => {
     setInput("")
+    setResults([])
   }
 
   const hanldeHide = () => {
-    reset()
+    if (!input) reset()
     props.hide()
   }
 
-  const Result = (props) => {
-    return (
-      <div className={style.result}>
-        <div className={style.poster} onClick={props.onClick}>
-          <img src={posterSrcSm + props.poster_path} alt="Poster" ></img>
-        </div>
-        <div className={style.titleBar} onClick={props.onClick}>
-          <p className={style.title}>{props.title}</p>
-          <p className={style.date}>{props.release_date}</p>
-        </div>
-        <div className={style.overview} >
-          <ReactReadMoreReadLess
-            charLimit={80}
-            readMoreText={"Read more ▼"}
-            readLessText={"Read less ▲"}
-          >
-            {props.overview}
-          </ReactReadMoreReadLess>
-        </div>
-      </div>
-    )
+
+  const renderResults = (results) => {
+    if (results.length > 0) {
+      return results.map(result => {
+        return <Result key={uuid()} onClick={() => handleSubmit(result.id)} title={result.title} release_date={result.release_date} overview={result.overview} poster_path={result.poster_path} > </Result>
+      })
+    } else if (input) {
+      return <p>Type in something else.</p>
+    } else {
+      return []
+    }
   }
 
   const { promiseInProgress } = usePromiseTracker();
@@ -92,14 +83,11 @@ const FindMovieModal = (props) => {
         centered>
         <Modal.Body className={style.modalBody}>
           <div className={style.wrapper}>
-            <form onSubmit={e => handleSubmit(e)}>
+            <form onSubmit={event => event.preventDefault()}>
               <input type="text" placeholder={defaultInput} value={input} onChange={(e) => setInput(e.target.value)} />
             </form>
-            {promiseInProgress ? <LoadingIndicator /> :
-              results.map(result => {
-                return <Result key={uuid()} onClick={() => handleSubmit(result.id)} title={result.title} release_date={result.release_date} overview={result.overview} poster_path={result.poster_path} > </Result>
-              })
-            }
+            {console.log("RESULTS", results)}
+            {promiseInProgress ? <LoadingIndicator /> : renderResults(results)}
           </div>
         </Modal.Body>
       </Modal >
